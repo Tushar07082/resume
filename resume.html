@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>tushar singh software engineer - Google Search</title>
+<style>
+  :root{
+    --blue:#1a0dab;
+    --green:#006621;
+    --grey-text:#4d5156;
+    --grey-light:#70757a;
+    --border:#ebebeb;
+    --bg:#fff;
+    --chip-bg:#f1f3f4;
+    --chip-hover:#e8eaed;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:Arial, Roboto, "Helvetica Neue", sans-serif;
+    color:#202124;
+    background:var(--bg);
+  }
+  a{text-decoration:none;cursor:pointer;}
+
+  /* ===== Top bar ===== */
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    padding:20px 32px 0 32px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+  .logo{
+    font-size:28px;
+    font-weight:600;
+    letter-spacing:-1px;
+    white-space:nowrap;
+  }
+  .logo span:nth-child(1){color:#4285F4;}
+  .logo span:nth-child(2){color:#EA4335;}
+  .logo span:nth-child(3){color:#FBBC05;}
+  .logo span:nth-child(4){color:#4285F4;}
+  .logo span:nth-child(5){color:#34A853;}
+  .logo span:nth-child(6){color:#EA4335;}
+
+  .searchbar-wrap{flex:1;max-width:560px;}
+  .searchbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid #dfe1e5;
+    border-radius:24px;
+    padding:10px 16px;
+    box-shadow:0 1px 6px rgba(32,33,36,.15);
+  }
+  .searchbar svg{flex:none;}
+  .searchbar input{
+    border:none;outline:none;flex:1;font-size:16px;color:#202124;font-family:inherit;
+  }
+  .searchbar .mic{color:#4285F4;}
+
+  .account-dot{
+    width:32px;height:32px;border-radius:50%;
+    background:linear-gradient(135deg,#4285F4,#34A853);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:600;flex:none;
+  }
+
+  /* ===== Tabs ===== */
+  .tabs{
+    max-width:1100px;
+    margin:14px auto 0 auto;
+    padding:0 32px 0 148px;
+    display:flex;
+    gap:26px;
+    border-bottom:1px solid var(--border);
+  }
+  .tabs a{
+    font-size:13px;
+    color:var(--grey-text);
+    padding:0 4px 12px 4px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .tabs a.active{
+    color:var(--blue);
+    border-bottom:3px solid var(--blue);
+    font-weight:500;
+  }
+
+  .statline{
+    max-width:1100px;
+    margin:0 auto;
+    padding:14px 32px 0 148px;
+    font-size:13px;
+    color:var(--grey-light);
+  }
+
+  /* ===== Body layout ===== */
+  .content{
+    max-width:1100px;
+    margin:0 auto;
+    padding:14px 32px 60px 148px;
+    display:flex;
+    gap:56px;
+  }
+  .results{flex:1;min-width:0;max-width:600px;}
+  .panel{width:360px;flex:none;}
+
+  /* ===== Result cards ===== */
+  .result{margin-bottom:34px;max-width:600px;}
+  .result .site{
+    display:flex;align-items:center;gap:10px;margin-bottom:2px;
+  }
+  .favicon{
+    width:26px;height:26px;border-radius:50%;
+    background:#f1f3f4;display:flex;align-items:center;justify-content:center;
+    font-size:13px;flex:none;
+  }
+  .breadcrumb{font-size:13px;color:#202124;line-height:1.3;}
+  .breadcrumb .domain{color:#202124;}
+  .breadcrumb .path{color:var(--grey-light);}
+  .result h3{
+    margin:2px 0 4px 0;
+    font-size:20px;
+    font-weight:400;
+    color:var(--blue);
+  }
+  .result .date{color:var(--grey-light);font-weight:400;}
+  .result p{
+    margin:0;
+    font-size:14px;
+    line-height:1.58;
+    color:#4d5156;
+  }
+  .result p b{color:#202124;font-weight:600;}
+  .result .tags{
+    margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;
+  }
+  .tag{
+    font-size:12px;color:var(--blue);background:#f8f9fa;
+    border:1px solid var(--border);border-radius:4px;padding:3px 8px;
+  }
+
+  .sitelinks{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;
+    margin-top:10px;margin-left:2px;
+  }
+  .sitelinks div h4{margin:0;font-size:14px;font-weight:400;color:var(--blue);}
+  .sitelinks div p{margin:2px 0 0 0;font-size:12px;color:var(--grey-text);}
+
+  /* ===== Knowledge panel ===== */
+  .panel{
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+  }
+  .kp-top{text-align:center;margin-bottom:6px;}
+  .avatar{
+    width:112px;height:112px;border-radius:50%;
+    margin:0 auto 12px auto;
+    background:linear-gradient(135deg,#4285F4 0%,#34A853 50%,#FBBC05 100%);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-size:38px;font-weight:600;
+  }
+  .kp-name{font-size:22px;font-weight:500;color:#202124;margin:0;}
+  .kp-role{font-size:14px;color:var(--grey-text);margin:2px 0 12px 0;}
+  .kp-summary{
+    font-size:13.5px;line-height:1.6;color:#3c4043;
+    padding-bottom:14px;border-bottom:1px solid var(--border);margin-bottom:14px;
+  }
+  .kp-row{
+    display:flex;font-size:13px;padding:6px 0;line-height:1.5;
+  }
+  .kp-row .k{width:110px;flex:none;color:var(--grey-light);}
+  .kp-row .v{color:#202124;}
+  .kp-row .v a{color:var(--blue);}
+
+  .kp-chips-title{font-size:13px;color:var(--grey-light);margin:16px 0 8px 0;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    background:var(--chip-bg);border-radius:16px;padding:6px 14px;
+    font-size:12.5px;color:#3c4043;
+  }
+
+  .related-title{
+    font-size:13px;color:var(--grey-light);margin:20px 0 10px 0;
+    padding-top:14px;border-top:1px solid var(--border);
+  }
+  .related{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .related-card{
+    border:1px solid var(--border);border-radius:8px;padding:10px 12px;
+    font-size:12.5px;color:var(--blue);
+  }
+  .related-card .sub{color:var(--grey-light);display:block;margin-top:2px;font-size:11.5px;}
+
+  /* ===== Footer ===== */
+  .footer{
+    text-align:center;padding:30px 0 50px 0;
+  }
+  .goo{font-size:26px;font-weight:600;letter-spacing:1px;}
+  .goo span:nth-child(1){color:#4285F4;}
+  .goo span:nth-child(2){color:#EA4335;}
+  .goo span:nth-child(3){color:#FBBC05;}
+  .goo span:nth-child(4){color:#4285F4;}
+  .goo span:nth-child(5){color:#34A853;}
+  .goo span:nth-child(6){color:#EA4335;}
+  .goo span:nth-child(7){color:#4285F4;}
+  .goo span:nth-child(8){color:#FBBC05;}
+  .goo span:nth-child(9){color:#EA4335;}
+  .pagenums{margin-top:6px;color:var(--blue);font-size:14px;letter-spacing:6px;}
+  .disclaimer{margin-top:26px;font-size:11.5px;color:#9aa0a6;}
+
+  @media (max-width:880px){
+    .tabs,.statline,.content{padding-left:32px;}
+    .content{flex-direction:column;}
+    .panel{width:100%;}
+    .topbar{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo"><span>T</span><span>u</span><span>s</span><span>h</span><span>a</span><span>r</span></div>
+    <div class="searchbar-wrap">
+      <div class="searchbar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#4285F4" stroke-width="2"/><line x1="16.5" y1="16.5" x2="21" y2="21" stroke="#4285F4" stroke-width="2" stroke-linecap="round"/></svg>
+        <input value="tushar singh software engineer" readonly>
+        <span class="mic">🎤</span>
+      </div>
+    </div>
+    <div class="account-dot">TS</div>
+  </div>
+
+  <div class="tabs">
+    <a class="active">All</a>
+    <a>Experience</a>
+    <a>Projects</a>
+    <a>Skills</a>
+    <a>Achievements</a>
+    <a>Contact</a>
+  </div>
+
+  <div class="statline">About 185 results (0.24 seconds) — sorted by impact</div>
+
+  <div class="content">
+
+    <div class="results">
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">☁️</span>
+          <div class="breadcrumb"><span class="domain">Salesforce</span><br><span class="path">tableau-next › unified-analytics › tushar-singh</span></div>
+        </div>
+        <h3>Tushar Singh — Software Engineer <span class="date">· Jul 2024 – Present</span></h3>
+        <p>Full-stack engineer on <b>Tableau Next / Unified Analytics</b>. Architected a distributed, server-side
+        <b>thumbnail-generation subsystem</b> (async queue, headless-render pipeline, row-level-security-preserving
+        impersonation, state machines, cost-bounded rate limiting) — approved by an architect, EM, and PM as the
+        team's plan of record before the rollout was deprioritized post-sign-off. Built a full-stack
+        <b>permission-provisioning platform</b> end to end, re-architecting the contract so new permission types
+        need zero backend changes.</p>
+        <div class="sitelinks">
+          <div><h4>Accessibility ownership</h4><p>De-facto WCAG/ARIA owner; shadow-DOM focus fixes adopted team-wide.</p></div>
+          <div><h4>Observability</h4><p>Team's first production telemetry + first E2E test suite.</p></div>
+          <div><h4>Production ownership</h4><p>Root-caused an outage; codified the fix as the standing runbook.</p></div>
+          <div><h4>Technical leadership</h4><p>Reviewer of record for 9 engineers across 3 teams.</p></div>
+        </div>
+        <div class="tags">
+          <span class="tag">100+ merged PRs</span>
+          <span class="tag">5 repositories</span>
+          <span class="tag">29 collaborators</span>
+          <span class="tag">~185 work items</span>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">☁️</span>
+          <div class="breadcrumb"><span class="domain">Salesforce</span><br><span class="path">internships › tushar-singh</span></div>
+        </div>
+        <h3>Tushar Singh — Software Engineer Intern <span class="date">· May 2023 – Jul 2023</span></h3>
+        <p>Built and optimized the <b>Formula Builder</b> for the Salesforce platform — cut client formula-creation
+        time by 50% and formula-complexity support tickets by 30%. Led the migration of <b>240,000+ users</b> from
+        Classic to Lightning UI, lifting user-satisfaction scores by 25%.</p>
+      </div>
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">🐙</span>
+          <div class="breadcrumb"><span class="domain">github.com</span><br><span class="path">tushar-singh › mychatroom</span></div>
+        </div>
+        <h3>MyChatRoom — real-time chat app</h3>
+        <p>Real-time chat application with private, secure rooms. <b>React</b> client, <b>Node.js/Express</b> server,
+        <b>Socket.io</b> for live messaging.</p>
+      </div>
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">🐙</span>
+          <div class="breadcrumb"><span class="domain">github.com</span><br><span class="path">tushar-singh › fitme</span></div>
+        </div>
+        <h3>FitMe — API-driven fitness app</h3>
+        <p>Surfaces exercises by muscle group with instant search. Built with <b>React</b> and <b>Material UI</b>,
+        integrating the RapidAPI exercise dataset.</p>
+      </div>
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">🎓</span>
+          <div class="breadcrumb"><span class="domain">nitkkr.ac.in</span><br><span class="path">alumni › tushar-singh</span></div>
+        </div>
+        <h3>B.Tech, Information Technology <span class="date">· Class of 2024</span></h3>
+        <p>National Institute of Technology, Kurukshetra, India. CGPA 9.18/10 (through 7th semester). Selected as
+        one of the top 10 teams to represent NIT Kurukshetra at <b>Smart India Hackathon 2023</b>.</p>
+      </div>
+
+      <div class="result">
+        <div class="site">
+          <span class="favicon">🏆</span>
+          <div class="breadcrumb"><span class="domain">leetcode.com</span><br><span class="path">u › tushar-singh</span></div>
+        </div>
+        <h3>Competitive programming profile</h3>
+        <p><b>Knight badge</b> holder (max rating 1912) — 550+ problems solved. 250+ additional problems solved on
+        GeeksforGeeks.</p>
+      </div>
+
+    </div>
+
+    <div class="panel">
+      <div class="kp-top">
+        <div class="avatar">TS</div>
+        <p class="kp-name">Tushar Singh</p>
+        <p class="kp-role">Software Engineer · Full-Stack / Distributed Systems</p>
+      </div>
+      <div class="kp-summary">
+        Full-stack engineer with 2+ years designing and shipping distributed backend systems, REST APIs, and
+        production UI features on a large-scale enterprise SaaS platform. Architecture reviewed at the
+        engineer/EM/PM level; owns systems end to end.
+      </div>
+      <div class="kp-row"><div class="k">Employer</div><div class="v">Salesforce — Tableau Next</div></div>
+      <div class="kp-row"><div class="k">Education</div><div class="v">NIT, Kurukshetra (2024)</div></div>
+      <div class="kp-row"><div class="k">Location</div><div class="v">Ghaziabad, Uttar Pradesh, IN</div></div>
+      <div class="kp-row"><div class="k">Email</div><div class="v"><a href="mailto:sahil@gmail.com">sahil@gmail.com</a></div></div>
+      <div class="kp-row"><div class="k">Phone</div><div class="v">+91 74178 67628</div></div>
+
+      <div class="kp-chips-title">Core skills</div>
+      <div class="chips">
+        <span class="chip">Java</span>
+        <span class="chip">TypeScript</span>
+        <span class="chip">Apex</span>
+        <span class="chip">React</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">Distributed Systems</span>
+        <span class="chip">REST API Design</span>
+        <span class="chip">Lightning Web Components</span>
+        <span class="chip">Data Cloud</span>
+        <span class="chip">WCAG / ARIA</span>
+      </div>
+
+      <div class="related-title">People also search for</div>
+      <div class="related">
+        <div class="related-card">System Design<span class="sub">architecture reviews</span></div>
+        <div class="related-card">Connect REST API<span class="sub">platform APIs</span></div>
+        <div class="related-card">Tableau Next<span class="sub">Salesforce product</span></div>
+        <div class="related-card">Accessibility<span class="sub">WCAG / ARIA</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="goo"><span>G</span><span>o</span><span>o</span><span>o</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+    <div class="pagenums">1&nbsp;&nbsp;2&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;&nbsp;5&nbsp;&nbsp;6&nbsp;&nbsp;7&nbsp;&nbsp;8&nbsp;&nbsp;9&nbsp;&nbsp;10&nbsp;&nbsp;Next</div>
+    <div class="disclaimer">A stylized, for-fun résumé mockup — not an actual search engine result.</div>
+  </div>
+
+</body>
+</html>
